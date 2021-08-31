@@ -1,5 +1,5 @@
-import { ProductRepository } from '@domain//presistence/product/repository/product.repository';
-import { CreateProductUseCase } from '@domain/use-case/product/create-product.use-case';
+import { ProductRepository } from '@core/presistence/product/repository/product.repository';
+import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
 import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 

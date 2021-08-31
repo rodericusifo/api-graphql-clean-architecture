@@ -1,6 +1,6 @@
-import { FindProductByIdUseCase } from '@domain/use-case/product/find-product-by-id.use-case';
-import { CreateProductDTO } from '@domain/use-case/product/dto/create-product.dto';
-import { CreateProductUseCase } from '@domain/use-case/product/create-product.use-case';
+import { FindProductByIdUseCase } from '@core/use-case/product/find-product-by-id.use-case';
+import { CreateProductDTO } from '@core/use-case/product/dto/create-product.dto';
+import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 
 @Controller('products')

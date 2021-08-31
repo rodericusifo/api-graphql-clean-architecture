@@ -1,5 +1,5 @@
 import { IsInstance, IsString, IsNotEmpty, IsNumber } from 'class-validator';
-import { ProductEntity } from '@domain/presistence/product/entity/product.entity';
+import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 
 export class CartDTO {
   @IsNotEmpty()

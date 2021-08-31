@@ -74,8 +74,9 @@
     ],
     "moduleNameMapper": {
       "@application/(.*)": "<rootDir>/application/$1",
-      "@domain/(.*)": "<rootDir>/domain/$1",
-      "@infrastructure/(.*)": "<rootDir>/infrastructure/$1"
+      "@core/(.*)": "<rootDir>/core/$1",
+      "@infrastructure/(.*)": "<rootDir>/infrastructure/$1",
+      "@libs/(.*)": "<rootDir>/libs/$1"
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"

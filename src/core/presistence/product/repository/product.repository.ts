@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { ProductEntity } from '@domain/presistence/product/entity/product.entity';
-import { IProductRepositoryPort } from '@domain/presistence/product/repository/port/product-repository.port';
+import { ProductEntity } from '@core/presistence/product/entity/product.entity';
+import { IProductRepositoryPort } from '@core/presistence/product/repository/port/product-repository.port';
 
 @EntityRepository(ProductEntity)
 export class ProductRepository

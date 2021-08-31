@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { ProductEntity } from '@domain/presistence/product/entity/product.entity';
+import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 
 @Entity({ name: 'carts' })
 @ObjectType()

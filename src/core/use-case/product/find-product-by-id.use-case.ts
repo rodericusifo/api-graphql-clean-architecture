@@ -1,8 +1,8 @@
-import { ProductDTO } from '@domain/use-case/product/dto/product.dto';
-import { UseCase } from '../../../libs/contract/use-case';
+import { ProductDTO } from '@core/use-case/product/dto/product.dto';
+import { UseCase } from '@libs/contract/use-case';
 import { Inject, NotFoundException } from '@nestjs/common';
-import { ProductMapper } from '@domain/use-case/product/mapper/product.mapper';
-import { IProductRepositoryPort } from '@domain/presistence/product/repository/port/product-repository.port';
+import { ProductMapper } from '@core/use-case/product/mapper/product.mapper';
+import { IProductRepositoryPort } from '@core/presistence/product/repository/port/product-repository.port';
 
 export class FindProductByIdUseCase implements UseCase<string, ProductDTO> {
   constructor(

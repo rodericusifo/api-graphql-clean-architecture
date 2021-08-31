@@ -13,8 +13,9 @@
     "incremental": true,
     "paths": {
       "@application/*": ["src/application/*"],
-      "@domain/*": ["src/domain/*"],
+      "@core/*": ["src/core/*"],
       "@infrastructure/*": ["src/infrastructure/*"],
+      "@libs/*": ["src/libs/*"]
     }
   }
 }

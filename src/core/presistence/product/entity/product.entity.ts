@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CartEntity } from '@domain/presistence/cart/entity/cart.entity';
+import { CartEntity } from '@core/presistence/cart/entity/cart.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 

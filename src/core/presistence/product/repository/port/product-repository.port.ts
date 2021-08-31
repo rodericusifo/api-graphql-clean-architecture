@@ -1,4 +1,4 @@
-import { ProductEntity } from '@domain/presistence/product/entity/product.entity';
+import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 
 export interface IProductRepositoryPort {
   storeProduct(productEntity: ProductEntity): Promise<ProductEntity>;

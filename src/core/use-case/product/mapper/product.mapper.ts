@@ -1,5 +1,5 @@
-import { ProductEntity } from '../../../presistence/product/entity/product.entity';
-import { ProductDTO } from '../../../use-case/product/dto/product.dto';
+import { ProductEntity } from '@core/presistence/product/entity/product.entity';
+import { ProductDTO } from '@core/use-case/product/dto/product.dto';
 
 export class ProductMapper {
   static DTOToEntity(productDTO: Partial<ProductEntity>): ProductEntity {

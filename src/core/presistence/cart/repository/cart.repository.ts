@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { CartEntity } from '@domain/presistence/cart/entity/cart.entity';
-import { ICartRepositoryPort } from '@domain/presistence/cart/repository/port/cart-repository.port';
+import { CartEntity } from '@core/presistence/cart/entity/cart.entity';
+import { ICartRepositoryPort } from '@core/presistence/cart/repository/port/cart-repository.port';
 
 @EntityRepository(CartEntity)
 export class CartRepository

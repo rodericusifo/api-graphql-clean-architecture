@@ -1,5 +1,5 @@
-import { FindProductByIdUseCase } from '@domain/use-case/product/find-product-by-id.use-case';
-import { ProductRepository } from '@domain/presistence/product/repository/product.repository';
+import { FindProductByIdUseCase } from '@core/use-case/product/find-product-by-id.use-case';
+import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 

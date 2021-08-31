@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
-import { CartEntity } from '@domain/presistence/cart/entity/cart.entity';
-import { CreateCartUseCase } from '@domain/use-case/cart/create-cart.use-case';
-import { CreateCartDTO } from '@domain/use-case/cart/dto/create-cart.dto';
+import { CartEntity } from '@core/presistence/cart/entity/cart.entity';
+import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
+import { CreateCartDTO } from '@core/use-case/cart/dto/create-cart.dto';
 
 @Resolver()
 export class CartResolver {

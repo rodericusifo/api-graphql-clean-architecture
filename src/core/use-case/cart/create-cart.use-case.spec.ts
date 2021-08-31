@@ -1,8 +1,8 @@
-import { CartRepository } from '@domain/presistence/cart/repository/cart.repository';
-import { ProductRepository } from '@domain/presistence/product/repository/product.repository';
+import { CartRepository } from '@core/presistence/cart/repository/cart.repository';
+import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateCartUseCase } from '@domain/use-case/cart/create-cart.use-case';
+import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
 
 describe('FindProductByIdUseCase', () => {
   let createCartUseCase: CreateCartUseCase;
