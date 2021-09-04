@@ -1,24 +1,28 @@
-import { IsInstance, IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsInstance,
+  IsString,
+  IsNumber,
+  IsOptional,
+  Min,
+} from 'class-validator';
 import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 
 export class CartDTO {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   public readonly id: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
+  @Min(0)
   public readonly quantity: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
+  @Min(0)
   public readonly amount: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsInstance(ProductEntity)
   public readonly product: ProductEntity;
-
-  public constructor(opts?: Partial<CartDTO>) {
-    Object.assign(this, opts);
-  }
 }

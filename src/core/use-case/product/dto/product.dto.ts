@@ -1,27 +1,25 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, IsOptional, Min } from 'class-validator';
 
 export class ProductDTO {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   public readonly id: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   public readonly name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
+  @Min(0)
   public readonly price: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
+  @Min(0)
   public readonly stock: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   public readonly description: string;
-
-  public constructor(opts?: Partial<ProductDTO>) {
-    Object.assign(this, opts);
-  }
 }

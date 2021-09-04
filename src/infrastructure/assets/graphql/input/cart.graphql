@@ -1,0 +1,4 @@
+input CreateCartInput {
+  quantity: Int
+  productId: String
+}

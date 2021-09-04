@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 import { CreateProductDTO } from '@core/use-case/product/dto/create-product.dto';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
@@ -12,13 +11,15 @@ export class ProductResolver {
     private readonly createProductUseCase: CreateProductUseCase,
   ) {}
 
-  @Query(() => String)
-  sayHello(): string {
+  @Query()
+  sayHello() {
     return 'Hello World!';
   }
 
-  @Mutation(() => ProductEntity)
-  createProduct(@Args('createProductDTO') createProductDTO: CreateProductDTO) {
+  @Mutation()
+  createProduct(
+    @Args('createProductInput') createProductDTO: CreateProductDTO,
+  ) {
     return this.createProductUseCase.execute(createProductDTO);
   }
 }

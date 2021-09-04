@@ -2,16 +2,20 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ProductModule } from '@application/module/product.module';
-import { CartModule } from '@application/module/cart.module';
+import { ProductModule } from '@infrastructure/module/product.module';
+import { CartModule } from '@infrastructure/module/cart.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      autoSchemaFile: join(
-        process.cwd(),
-        'src/infrastructure/config/graphql/schema.gql',
-      ),
+      typePaths: ['src/infrastructure/assets/graphql/**/*.graphql'],
+      definitions: {
+        path: join(
+          process.cwd(),
+          'src/infrastructure/assets/graphql/graphql.schema.ts',
+        ),
+        outputAs: 'class',
+      },
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -19,7 +23,7 @@ import { CartModule } from '@application/module/cart.module';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'try_graphql',
+      database: 'api_graphql_clean_architecture',
       entities: [join(__dirname, '/../../**/**.entity{.ts,.js}')],
       synchronize: true,
       autoLoadEntities: true,

@@ -1,12 +1,13 @@
 import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 import { ProductDTO } from '@core/use-case/product/dto/product.dto';
+import { plainToClass } from 'class-transformer';
 
 export class ProductMapper {
-  static DTOToEntity(productDTO: Partial<ProductEntity>): ProductEntity {
-    return new ProductEntity(productDTO);
+  static DTOToEntity(productDTO: Partial<ProductDTO>): ProductEntity {
+    return plainToClass(ProductEntity, productDTO);
   }
 
-  static EntityToDTO(productEntity: ProductEntity): ProductDTO {
-    return new ProductDTO(productEntity);
+  static EntityToDTO(productEntity: Partial<ProductEntity>): ProductDTO {
+    return plainToClass(ProductDTO, productEntity);
   }
 }

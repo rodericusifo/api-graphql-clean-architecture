@@ -1,0 +1,6 @@
+type Cart {
+  id: ID
+  amount: Int
+  quantity: Int
+  product: Product
+}

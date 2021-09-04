@@ -1,5 +1,5 @@
-import { CartResolver } from './../resolver/cart.resolver';
-import { CartController } from './../controller/cart.controller';
+import { CartResolver } from '@application/resolver/cart.resolver';
+import { CartController } from '@application/controller/cart.controller';
 import { Module, Provider } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { CartRepository } from '@core/presistence/cart/repository/cart.repository';

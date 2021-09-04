@@ -1,30 +1,27 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
 
-@InputType()
 export class CreateProductDTO {
   @IsNotEmpty()
   @IsString()
-  @Field({ nullable: false })
-  public readonly name: string;
+  name: string;
 
   @IsNotEmpty()
   @IsNumber()
-  @Field(() => Int, { nullable: false })
-  public readonly price: number;
+  @Min(0)
+  price: number;
 
   @IsNotEmpty()
   @IsNumber()
-  @Field(() => Int, { nullable: false })
-  public readonly stock: number;
+  @Min(0)
+  stock: number;
 
   @IsOptional()
   @IsString()
-  @Field({ nullable: true })
-  public readonly description?: string;
-
-  public constructor(opts?: Partial<CreateProductDTO>) {
-    Object.assign(this, opts);
-  }
+  description?: string;
 }

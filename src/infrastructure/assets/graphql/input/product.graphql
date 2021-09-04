@@ -1,0 +1,6 @@
+input CreateProductInput {
+  name: String
+  price: Int
+  stock: Int
+  description: String
+}
