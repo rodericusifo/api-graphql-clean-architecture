@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ProductModule } from '@infrastructure/module/product.module';
-import { CartModule } from '@infrastructure/module/cart.module';
+import { ProductModule } from '@application/module/product.module';
+import { CartModule } from '@application/module/cart.module';
 
 @Module({
   imports: [

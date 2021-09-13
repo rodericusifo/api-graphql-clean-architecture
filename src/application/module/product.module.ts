@@ -5,10 +5,11 @@ import { FindProductByIdUseCase } from '@core/use-case/product/find-product-by-i
 import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
 import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { ProductController } from '@application/controller/product.controller';
+import { ProductTokens } from '@application/token/product.token';
 
 const presistenceProvider: Provider[] = [
   {
-    provide: 'PRODUCT_REPOSITORY',
+    provide: ProductTokens.ProductRepository,
     inject: [Connection],
     useFactory: (connection) =>
       connection.getCustomRepository(ProductRepository),
@@ -17,14 +18,14 @@ const presistenceProvider: Provider[] = [
 
 const useCaseProvider: Provider[] = [
   {
-    provide: 'CREATE_PRODUCT_USE_CASE',
-    inject: ['PRODUCT_REPOSITORY'],
+    provide: ProductTokens.CreateProductUseCase,
+    inject: [ProductTokens.ProductRepository],
     useFactory: (productRepository) =>
       new CreateProductUseCase(productRepository),
   },
   {
-    provide: 'FIND_PRODUCT_BY_ID_USE_CASE',
-    inject: ['PRODUCT_REPOSITORY'],
+    provide: ProductTokens.FindProductByIdUseCase,
+    inject: [ProductTokens.ProductRepository],
     useFactory: (productRepository) =>
       new FindProductByIdUseCase(productRepository),
   },

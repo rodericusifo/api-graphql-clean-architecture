@@ -2,6 +2,7 @@ import { FindProductByIdUseCase } from '@core/use-case/product/find-product-by-i
 import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ProductTokens } from '@application/token/product.token';
 
 describe('FindProductByIdUseCase', () => {
   let findProductByIdUseCase: FindProductByIdUseCase;
@@ -10,7 +11,7 @@ describe('FindProductByIdUseCase', () => {
   beforeEach(async () => {
     const presistenceProvider: Provider[] = [
       {
-        provide: 'PRODUCT_REPOSITORY',
+        provide: ProductTokens.ProductRepository,
         useFactory: jest.fn(() => ({
           storeProduct: jest.fn(),
           findProductById: jest.fn(),
@@ -18,14 +19,25 @@ describe('FindProductByIdUseCase', () => {
       },
     ];
 
+    const useCaseProvider: Provider[] = [
+      {
+        provide: ProductTokens.FindProductByIdUseCase,
+        inject: [ProductTokens.ProductRepository],
+        useFactory: (productRepository) =>
+          new FindProductByIdUseCase(productRepository),
+      },
+    ];
+
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FindProductByIdUseCase, ...presistenceProvider],
+      providers: [...useCaseProvider, ...presistenceProvider],
     }).compile();
 
     findProductByIdUseCase = module.get<FindProductByIdUseCase>(
-      FindProductByIdUseCase,
+      ProductTokens.FindProductByIdUseCase,
     );
-    productRepository = module.get<ProductRepository>('PRODUCT_REPOSITORY');
+    productRepository = module.get<ProductRepository>(
+      ProductTokens.ProductRepository,
+    );
   });
 
   it('should be defined', () => {
@@ -34,7 +46,7 @@ describe('FindProductByIdUseCase', () => {
 
   describe('.execute()', () => {
     it('should be success find product by id', async () => {
-      const inputProduct = '2102o32013021321i0120';
+      const inputProduct = { id: '2102o32013021321i0120' };
       const foundProduct = {
         id: '2102o32013021321i0120',
         name: 'Laptop 1',

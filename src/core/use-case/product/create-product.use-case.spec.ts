@@ -1,3 +1,4 @@
+import { ProductTokens } from '@application/token/product.token';
 import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
 import { Provider } from '@nestjs/common';
@@ -10,20 +11,32 @@ describe('CreateProductUseCase', () => {
   beforeEach(async () => {
     const presistenceProvider: Provider[] = [
       {
-        provide: 'PRODUCT_REPOSITORY',
+        provide: ProductTokens.ProductRepository,
         useFactory: jest.fn(() => ({
           storeProduct: jest.fn(),
         })),
       },
     ];
 
+    const useCaseProvider: Provider[] = [
+      {
+        provide: ProductTokens.CreateProductUseCase,
+        inject: [ProductTokens.ProductRepository],
+        useFactory: (productRepository) =>
+          new CreateProductUseCase(productRepository),
+      },
+    ];
+
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CreateProductUseCase, ...presistenceProvider],
+      providers: [...useCaseProvider, ...presistenceProvider],
     }).compile();
 
-    createProductUseCase =
-      module.get<CreateProductUseCase>(CreateProductUseCase);
-    productRepository = module.get<ProductRepository>('PRODUCT_REPOSITORY');
+    createProductUseCase = module.get<CreateProductUseCase>(
+      ProductTokens.CreateProductUseCase,
+    );
+    productRepository = module.get<ProductRepository>(
+      ProductTokens.ProductRepository,
+    );
   });
 
   it('should be defined', () => {

@@ -3,11 +3,12 @@ import { CreateProductDTO } from '@core/use-case/product/dto/create-product.dto'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
+import { ProductTokens } from '@application/token/product.token';
 
 @Resolver()
 export class ProductResolver {
   constructor(
-    @Inject('CREATE_PRODUCT_USE_CASE')
+    @Inject(ProductTokens.CreateProductUseCase)
     private readonly createProductUseCase: CreateProductUseCase,
   ) {}
 
@@ -17,9 +18,7 @@ export class ProductResolver {
   }
 
   @Mutation()
-  createProduct(
-    @Args('createProductInput') createProductDTO: CreateProductDTO,
-  ) {
-    return this.createProductUseCase.execute(createProductDTO);
+  createProduct(@Args('product') product: any) {
+    return this.createProductUseCase.execute({ ...product });
   }
 }

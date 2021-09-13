@@ -1,8 +1,10 @@
+import { CartTokens } from '@application/token/cart.token';
 import { CartRepository } from '@core/presistence/cart/repository/cart.repository';
 import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
+import { ProductTokens } from '@application/token/product.token';
 
 describe('FindProductByIdUseCase', () => {
   let createCartUseCase: CreateCartUseCase;
@@ -12,27 +14,40 @@ describe('FindProductByIdUseCase', () => {
   beforeEach(async () => {
     const presistenceProvider: Provider[] = [
       {
-        provide: 'PRODUCT_REPOSITORY',
+        provide: ProductTokens.ProductRepository,
         useFactory: jest.fn(() => ({
           storeProduct: jest.fn(),
           findProductById: jest.fn(),
         })),
       },
       {
-        provide: 'CART_REPOSITORY',
+        provide: CartTokens.CartRepository,
         useFactory: jest.fn(() => ({
           storeCart: jest.fn(),
         })),
       },
     ];
 
+    const useCaseProvider: Provider[] = [
+      {
+        provide: CartTokens.CreateCartUseCase,
+        inject: [CartTokens.CartRepository, ProductTokens.ProductRepository],
+        useFactory: (cartRepository, productRepository) =>
+          new CreateCartUseCase(cartRepository, productRepository),
+      },
+    ];
+
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CreateCartUseCase, ...presistenceProvider],
+      providers: [...useCaseProvider, ...presistenceProvider],
     }).compile();
 
-    createCartUseCase = module.get<CreateCartUseCase>(CreateCartUseCase);
-    productRepository = module.get<ProductRepository>('PRODUCT_REPOSITORY');
-    cartRepository = module.get<CartRepository>('CART_REPOSITORY');
+    createCartUseCase = module.get<CreateCartUseCase>(
+      CartTokens.CreateCartUseCase,
+    );
+    productRepository = module.get<ProductRepository>(
+      ProductTokens.ProductRepository,
+    );
+    cartRepository = module.get<CartRepository>(CartTokens.CartRepository);
   });
 
   it('should be defined', () => {
