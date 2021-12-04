@@ -1,9 +1,11 @@
-import { Module } from '@nestjs/common';
+import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ProductModule } from '@application/module/product.module';
 import { CartModule } from '@application/module/cart.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { TransformInterceptor } from '@application/interceptor/response.interceptor';
 
 @Module({
   imports: [
@@ -18,12 +20,12 @@ import { CartModule } from '@application/module/cart.module';
       },
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'api_graphql_clean_architecture',
+      port: 5432,
+      username: 'ifo',
+      password: '@12Maret1999',
+      database: 'Api_Graphql_Clean_Architecture',
       entities: [join(__dirname, '/../../**/**.entity{.ts,.js}')],
       synchronize: true,
       autoLoadEntities: true,

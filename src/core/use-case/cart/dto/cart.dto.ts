@@ -1,3 +1,4 @@
+import { ProductDTO } from '@core/use-case/product/dto/product.dto';
 import {
   IsInstance,
   IsString,
@@ -5,24 +6,27 @@ import {
   IsOptional,
   Min,
 } from 'class-validator';
-import { ProductEntity } from '@core/presistence/product/entity/product.entity';
 
 export class CartDTO {
   @IsOptional()
   @IsString()
-  public readonly id: string;
+  id?: string;
 
   @IsOptional()
   @IsNumber()
   @Min(0)
-  public readonly quantity: number;
+  quantity?: number;
 
   @IsOptional()
   @IsNumber()
   @Min(0)
-  public readonly amount: number;
+  amount?: number;
 
   @IsOptional()
-  @IsInstance(ProductEntity)
-  public readonly product: ProductEntity;
+  @IsInstance(ProductDTO)
+  productDTO?: ProductDTO;
+
+  calculateAmount() {
+    this.amount = this.quantity * this.productDTO.price;
+  }
 }

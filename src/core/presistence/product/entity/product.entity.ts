@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CartEntity } from '@core/presistence/cart/entity/cart.entity';
+import { Cart } from '@core/presistence/cart/entity/cart.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'products' })
-export class ProductEntity {
+export class Product {
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
 
@@ -17,8 +17,9 @@ export class ProductEntity {
   stock: number;
 
   @Column({ name: 'description', type: 'text', nullable: true, default: '' })
-  description?: string;
+  description: string;
 
-  @OneToMany(() => CartEntity, (cart) => cart.product)
-  carts?: CartEntity[];
+  // RELATION
+  @OneToMany(() => Cart, (carts) => carts.product)
+  carts?: Cart[];
 }

@@ -1,4 +1,4 @@
-input CreateProductInput {
+input CreateProductRequest {
   name: String
   price: Int
   stock: Int

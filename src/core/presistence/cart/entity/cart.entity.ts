@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { ProductEntity } from '@core/presistence/product/entity/product.entity';
+import { Product } from '@core/presistence/product/entity/product.entity';
 
 @Entity({ name: 'carts' })
-export class CartEntity {
+export class Cart {
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
 
@@ -13,8 +13,9 @@ export class CartEntity {
   @Column({ name: 'amount', type: 'int', nullable: false })
   amount: number;
 
-  @ManyToOne(() => ProductEntity, (product) => product.carts, {
+  // RELATION
+  @ManyToOne(() => Product, (product) => product.carts, {
     nullable: false,
   })
-  product: ProductEntity;
+  product: Product;
 }

@@ -1,4 +1,4 @@
-input CreateCartInput {
+input CreateCartRequest {
   quantity: Int
   productId: String
 }

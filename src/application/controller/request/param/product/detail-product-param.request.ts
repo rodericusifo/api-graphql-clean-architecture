@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
-export class FindProductByIdDTO {
+export class DetailProductParamRequest {
   @IsNotEmpty()
   @IsUUID()
   readonly id: string;

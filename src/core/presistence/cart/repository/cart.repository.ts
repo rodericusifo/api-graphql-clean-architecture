@@ -1,13 +1,21 @@
+import { CartMapper } from '@application/mapper/cart.mapper';
+import { CartDTO } from '@core/use-case/cart/dto/cart.dto';
 import { EntityRepository, Repository } from 'typeorm';
-import { CartEntity } from '@core/presistence/cart/entity/cart.entity';
+import { Cart } from '@core/presistence/cart/entity/cart.entity';
 import { ICartRepositoryPort } from '@core/presistence/cart/repository/port/cart-repository.port';
 
-@EntityRepository(CartEntity)
+@EntityRepository(Cart)
 export class CartRepository
-  extends Repository<CartEntity>
+  extends Repository<Cart>
   implements ICartRepositoryPort
 {
-  storeCart(cartEntity: CartEntity): Promise<CartEntity> {
-    return this.save(cartEntity);
+  async storeCart(cartDTO: Partial<CartDTO>) {
+    const cart = CartMapper.DTOToEntity(cartDTO);
+    await this.save(cart);
+  }
+
+  async findAllCart(): Promise<CartDTO[]> {
+    const carts = await this.find({ relations: ['product'] });
+    return carts.map(CartMapper.EntityToDTO);
   }
 }

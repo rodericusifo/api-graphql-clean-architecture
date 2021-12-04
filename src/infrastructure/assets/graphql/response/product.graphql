@@ -1,0 +1,4 @@
+type CreateProductResponse {
+  statusCode: Int
+  message: String 
+}

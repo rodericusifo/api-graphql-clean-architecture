@@ -2,8 +2,8 @@
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
-import { CreateCartDTO } from '@core/use-case/cart/dto/create-cart.dto';
 import { CartTokens } from '@application/token/cart.token';
+import { CreateCartRequest } from './request/cart/create-cart.request';
 
 @Resolver()
 export class CartResolver {
@@ -18,7 +18,8 @@ export class CartResolver {
   }
 
   @Mutation()
-  createCart(@Args('cart') cart: any) {
-    return this.createCartUseCase.execute({ ...cart });
+  createCart(@Args('request') request: CreateCartRequest) {
+    this.createCartUseCase.execute({ ...request });
+    return { message: 'Cart Successfully Created' };
   }
 }

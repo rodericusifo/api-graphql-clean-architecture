@@ -1,12 +1,12 @@
 import {
   IsNotEmpty,
-  IsNumber,
-  IsOptional,
   IsString,
+  IsNumber,
   Min,
+  IsOptional,
 } from 'class-validator';
 
-export class CreateProductDTO {
+export class CreateProductRequest {
   @IsNotEmpty()
   @IsString()
   readonly name: string;

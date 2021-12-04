@@ -1,0 +1,4 @@
+type CreateCartResponse {
+  statusCode: Int
+  message: String 
+}

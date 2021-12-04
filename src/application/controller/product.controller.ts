@@ -1,8 +1,9 @@
+import { DetailProductParamRequest } from '@application/controller/request/param/product/detail-product-param.request';
 import { ProductTokens } from '@application/token/product.token';
 import { FindProductByIdUseCase } from '@core/use-case/product/find-product-by-id.use-case';
-import { CreateProductDTO } from '@core/use-case/product/dto/create-product.dto';
 import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { CreateProductBodyRequest } from '@application/controller/request/body/product/create-product-body.request';
 
 @Controller('products')
 export class ProductController {
@@ -14,12 +15,16 @@ export class ProductController {
   ) {}
 
   @Post('create')
-  createProduct(@Body() product: any) {
-    return this.createProductUseCase.execute({ ...product });
+  async createProduct(@Body() body: CreateProductBodyRequest) {
+    await this.createProductUseCase.execute({ ...body });
+    return { message: 'Product Successfully Created' };
   }
 
-  @Get(':productId')
-  findProductById(@Param('productId') productId: any) {
-    return this.findProductByIdUseCase.execute({ id: productId });
+  @Get(':id/detail')
+  async detailProduct(@Param() param: DetailProductParamRequest) {
+    return {
+      message: 'Product Found',
+      result: await this.findProductByIdUseCase.execute({ ...param }),
+    };
   }
 }

@@ -1,7 +1,6 @@
 import { ProductDTO } from '@core/use-case/product/dto/product.dto';
 import { UseCase } from '@libs/contract/use-case';
 import { NotFoundException } from '@nestjs/common';
-import { ProductMapper } from '@application/mapper/product.mapper';
 import { IProductRepositoryPort } from '@core/presistence/product/repository/port/product-repository.port';
 import { FindProductByIdDTO } from '@core/use-case/product/dto/find-product-by-id.dto';
 
@@ -10,11 +9,14 @@ export class FindProductByIdUseCase
 {
   constructor(private readonly productRepository: IProductRepositoryPort) {}
 
-  async execute(product?: FindProductByIdDTO): Promise<ProductDTO> {
-    const foundProductEntity = await this.productRepository.findProductById(
-      product.id,
+  async execute(payload?: FindProductByIdDTO): Promise<ProductDTO> {
+    const foundProductDTO = await this.productRepository.findProductById(
+      payload.id,
     );
-    if (!foundProductEntity) throw new NotFoundException();
-    return ProductMapper.EntityToDTO(foundProductEntity);
+    if (!foundProductDTO)
+      throw new NotFoundException(
+        `Product with ID: ${payload.id} was not found`,
+      );
+    return foundProductDTO;
   }
 }

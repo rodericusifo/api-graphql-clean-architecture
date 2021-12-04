@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator';
+import { IsNotEmpty, IsNumber, Min, IsUUID } from 'class-validator';
 
-export class CreateCartDTO {
+export class CreateCartBodyRequest {
   @IsNotEmpty()
   @IsNumber()
   @Min(0)

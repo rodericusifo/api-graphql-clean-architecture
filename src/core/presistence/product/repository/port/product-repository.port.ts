@@ -1,6 +1,6 @@
-import { ProductEntity } from '@core/presistence/product/entity/product.entity';
+import { ProductDTO } from '@core/use-case/product/dto/product.dto';
 
 export interface IProductRepositoryPort {
-  storeProduct(productEntity: ProductEntity): Promise<ProductEntity>;
-  findProductById(productId: string): Promise<ProductEntity>;
+  storeProduct(productDTO: Partial<ProductDTO>);
+  findProductById(productId: string): Promise<ProductDTO>;
 }

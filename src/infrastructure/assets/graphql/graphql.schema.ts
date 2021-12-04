@@ -7,12 +7,12 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export class CreateCartInput {
+export class CreateCartRequest {
     quantity?: Nullable<number>;
     productId?: Nullable<string>;
 }
 
-export class CreateProductInput {
+export class CreateProductRequest {
     name?: Nullable<string>;
     price?: Nullable<number>;
     stock?: Nullable<number>;
@@ -20,13 +20,23 @@ export class CreateProductInput {
 }
 
 export abstract class IMutation {
-    abstract createCart(createCartInput?: Nullable<CreateCartInput>): Nullable<Cart> | Promise<Nullable<Cart>>;
+    abstract createCart(request?: Nullable<CreateCartRequest>): Nullable<CreateCartResponse> | Promise<Nullable<CreateCartResponse>>;
 
-    abstract createProduct(createProductInput?: Nullable<CreateProductInput>): Nullable<Product> | Promise<Nullable<Product>>;
+    abstract createProduct(request?: Nullable<CreateProductRequest>): Nullable<CreateProductResponse> | Promise<Nullable<CreateProductResponse>>;
 }
 
 export abstract class IQuery {
     abstract sayHello(): Nullable<string> | Promise<Nullable<string>>;
+}
+
+export class CreateCartResponse {
+    statusCode?: Nullable<number>;
+    message?: Nullable<string>;
+}
+
+export class CreateProductResponse {
+    statusCode?: Nullable<number>;
+    message?: Nullable<string>;
 }
 
 export class Cart {
