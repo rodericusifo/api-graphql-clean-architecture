@@ -6,6 +6,7 @@ import { ICartRepositoryPort } from '@core/presistence/cart/repository/port/cart
 import { IProductRepositoryPort } from '@core/presistence/product/repository/port/product-repository.port';
 import { UseCase } from '@libs/contract/use-case';
 import { plainToClass } from 'class-transformer';
+import { ProductDTO } from '../product/dto/product.dto';
 
 export class CreateCartUseCase implements UseCase<CreateCartDTO, void> {
   constructor(
@@ -14,13 +15,10 @@ export class CreateCartUseCase implements UseCase<CreateCartDTO, void> {
   ) {}
 
   async execute(payload?: CreateCartDTO) {
+    const productDTO = plainToClass(ProductDTO, { id: payload.productId });
     const foundProductDTO = await this.productRepository.findProductById(
-      payload.productId,
+      productDTO,
     );
-    if (!foundProductDTO)
-      throw new NotFoundException(
-        `Product with ID: ${payload.productId} was not found`,
-      );
     const cartDTO = plainToClass(CartDTO, {
       quantity: payload.quantity,
       productDTO: foundProductDTO,

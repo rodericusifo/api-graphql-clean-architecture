@@ -15,6 +15,7 @@ export interface Response<T> {
     count: number;
     page: number;
   };
+  status: string;
 }
 
 @Injectable()
@@ -28,10 +29,17 @@ export class TransformInterceptor<T>
     return next.handle().pipe(
       map((data) => {
         const response = {
-          statusCode: context.switchToHttp().getResponse().statusCode,
+          statusCode: context.switchToHttp().getResponse().statusCode
+            ? context.switchToHttp().getResponse().statusCode
+            : data.statusCode,
           message: data.message,
           data: data.result,
           meta: data.meta,
+          status:
+            context.switchToHttp().getResponse().statusCode === 201 ||
+            data.statusCode === 201
+              ? 'Created'
+              : 'OK',
         };
 
         for (const key in response) {

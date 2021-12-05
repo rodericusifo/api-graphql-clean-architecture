@@ -1,11 +1,10 @@
-import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ProductModule } from '@application/module/product.module';
 import { CartModule } from '@application/module/cart.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { TransformInterceptor } from '@application/interceptor/response.interceptor';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -19,13 +18,16 @@ import { TransformInterceptor } from '@application/interceptor/response.intercep
         outputAs: 'class',
       },
     }),
+    ConfigModule.forRoot({
+      envFilePath: 'environment/.env',
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'ifo',
-      password: '@12Maret1999',
-      database: 'Api_Graphql_Clean_Architecture',
+      host: process.env.DATABASE_HOST,
+      port: Number(process.env.DATABASE_PORT),
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [join(__dirname, '/../../**/**.entity{.ts,.js}')],
       synchronize: true,
       autoLoadEntities: true,

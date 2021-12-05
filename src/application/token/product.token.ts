@@ -7,4 +7,7 @@ export class ProductTokens {
   public static readonly FindProductByIdUseCase: unique symbol = Symbol(
     'FindProductByIdUseCase',
   );
+  public static readonly FindAllProductUseCase: unique symbol = Symbol(
+    'FindAllProductUseCase',
+  );
 }

@@ -1,8 +1,7 @@
-import { AllExceptionsFilter } from '@application/filter/exception.filter';
 import { TransformInterceptor } from '@application/interceptor/response.interceptor';
 import { AppModule } from '@application/module/app.module';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
-import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,8 +10,10 @@ async function bootstrap() {
     new TransformInterceptor(),
     new ClassSerializerInterceptor(app.get(Reflector)),
   );
-  app.useGlobalFilters(new AllExceptionsFilter(app.get(HttpAdapterHost)));
+  /* NOTE: Need Adjustment
+    app.useGlobalFilters(new AllExceptionsFilter(app.get(HttpAdapterHost))); 
+  */
   app.enableCors();
-  await app.listen(3000);
+  await app.listen(process.env.APP_PORT || 3000);
 }
 bootstrap();

@@ -20,6 +20,6 @@ export class CartResolver {
   @Mutation()
   createCart(@Args('request') request: CreateCartRequest) {
     this.createCartUseCase.execute({ ...request });
-    return { message: 'Cart Successfully Created' };
+    return { statusCode: 201, message: 'Cart Successfully Created' };
   }
 }

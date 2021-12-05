@@ -1,3 +1,4 @@
+import { FindAllProductUseCase } from '@core/use-case/product/find-all-product.use-case';
 import { Connection } from 'typeorm';
 import { Module, Provider } from '@nestjs/common';
 import { ProductResolver } from '@application/resolver/product.resolver';
@@ -28,6 +29,12 @@ const useCaseProvider: Provider[] = [
     inject: [ProductTokens.ProductRepository],
     useFactory: (productRepository) =>
       new FindProductByIdUseCase(productRepository),
+  },
+  {
+    provide: ProductTokens.FindAllProductUseCase,
+    inject: [ProductTokens.ProductRepository],
+    useFactory: (productRepository) =>
+      new FindAllProductUseCase(productRepository),
   },
 ];
 

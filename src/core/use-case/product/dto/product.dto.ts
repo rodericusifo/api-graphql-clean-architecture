@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import { IsNumber, IsString, IsOptional, Min } from 'class-validator';
 
 export class ProductDTO {

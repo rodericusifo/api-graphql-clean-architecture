@@ -32,11 +32,13 @@ export abstract class IQuery {
 export class CreateCartResponse {
     statusCode?: Nullable<number>;
     message?: Nullable<string>;
+    status?: Nullable<string>;
 }
 
 export class CreateProductResponse {
     statusCode?: Nullable<number>;
     message?: Nullable<string>;
+    status?: Nullable<string>;
 }
 
 export class Cart {

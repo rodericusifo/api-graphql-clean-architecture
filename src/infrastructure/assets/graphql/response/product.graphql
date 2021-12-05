@@ -1,4 +1,5 @@
 type CreateProductResponse {
   statusCode: Int
-  message: String 
+  message: String
+  status: String
 }

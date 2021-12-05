@@ -20,6 +20,6 @@ export class ProductResolver {
   @Mutation()
   createProduct(@Args('request') request: CreateProductRequest) {
     this.createProductUseCase.execute({ ...request });
-    return { message: 'Product Successfully Created' };
+    return { statusCode: 201, message: 'Product Successfully Created' };
   }
 }
