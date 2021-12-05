@@ -5,7 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ProductModule } from '@application/module/product.module';
 import { CartModule } from '@application/module/cart.module';
 import { ConfigModule } from '@nestjs/config';
-
+import { DatabaseType } from '@application/type/database.type';
 @Module({
   imports: [
     GraphQLModule.forRoot({
@@ -22,7 +22,7 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: 'environment/.env',
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: process.env.DATABASE_TYPE as DatabaseType,
       host: process.env.DATABASE_HOST,
       port: Number(process.env.DATABASE_PORT),
       username: process.env.DATABASE_USERNAME,
