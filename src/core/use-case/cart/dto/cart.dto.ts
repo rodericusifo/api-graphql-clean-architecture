@@ -1,15 +1,17 @@
 import { ProductDTO } from '@core/use-case/product/dto/product.dto';
+import { Exclude } from 'class-transformer';
 import {
   IsInstance,
-  IsString,
   IsNumber,
   IsOptional,
   Min,
+  IsDateString,
+  IsUUID,
 } from 'class-validator';
 
 export class CartDTO {
   @IsOptional()
-  @IsString()
+  @IsUUID()
   id?: string;
 
   @IsOptional()
@@ -24,9 +26,22 @@ export class CartDTO {
 
   @IsOptional()
   @IsInstance(ProductDTO)
-  productDTO?: ProductDTO;
+  product?: ProductDTO;
+
+  @IsOptional()
+  @IsDateString()
+  createdAt?: Date;
+
+  @IsOptional()
+  @IsDateString()
+  updatedAt?: Date;
+
+  @IsOptional()
+  @IsDateString()
+  @Exclude()
+  deletedAt?: Date;
 
   calculateAmount() {
-    this.amount = this.quantity * this.productDTO.price;
+    this.amount = this.quantity * this.product.price;
   }
 }

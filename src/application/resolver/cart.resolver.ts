@@ -3,7 +3,7 @@ import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
 import { CartTokens } from '@application/token/cart.token';
-import { CreateCartRequest } from './request/cart/create-cart.request';
+import { CreateCartRequest } from '@application/resolver/request/cart/create-cart.request';
 
 @Resolver()
 export class CartResolver {

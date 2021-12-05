@@ -1,8 +1,16 @@
-import { IsNumber, IsString, IsOptional, Min } from 'class-validator';
+import { Exclude } from 'class-transformer';
+import {
+  IsNumber,
+  IsString,
+  IsOptional,
+  Min,
+  IsDateString,
+  IsUUID,
+} from 'class-validator';
 
 export class ProductDTO {
   @IsOptional()
-  @IsString()
+  @IsUUID()
   id?: string;
 
   @IsOptional()
@@ -22,4 +30,17 @@ export class ProductDTO {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsDateString()
+  createdAt?: Date;
+
+  @IsOptional()
+  @IsDateString()
+  updatedAt?: Date;
+
+  @IsOptional()
+  @IsDateString()
+  @Exclude()
+  deletedAt?: Date;
 }

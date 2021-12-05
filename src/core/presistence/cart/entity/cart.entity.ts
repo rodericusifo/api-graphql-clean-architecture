@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Product } from '@core/presistence/product/entity/product.entity';
 
 @Entity({ name: 'carts' })
@@ -13,9 +21,17 @@ export class Cart {
   @Column({ name: 'amount', type: 'int', nullable: false })
   amount: number;
 
-  // RELATION
   @ManyToOne(() => Product, (product) => product.carts, {
     nullable: false,
   })
   product: Product;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

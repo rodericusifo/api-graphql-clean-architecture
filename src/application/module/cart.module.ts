@@ -7,6 +7,7 @@ import { ProductRepository } from '@core/presistence/product/repository/product.
 import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
 import { ProductTokens } from '@application/token/product.token';
 import { CartTokens } from '@application/token/cart.token';
+import { FindAllCartUseCase } from '@core/use-case/cart/find-all-cart.use-case';
 
 const presistenceProvider: Provider[] = [
   {
@@ -28,6 +29,11 @@ const useCaseProvider: Provider[] = [
     inject: [CartTokens.CartRepository, ProductTokens.ProductRepository],
     useFactory: (cartRepository, productRepository) =>
       new CreateCartUseCase(cartRepository, productRepository),
+  },
+  {
+    provide: CartTokens.FindAllCartUseCase,
+    inject: [CartTokens.CartRepository],
+    useFactory: (cartRepository) => new FindAllCartUseCase(cartRepository),
   },
 ];
 

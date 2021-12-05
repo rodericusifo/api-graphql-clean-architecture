@@ -7,6 +7,8 @@ import { CreateProductUseCase } from '@core/use-case/product/create-product.use-
 import { ProductRepository } from '@core/presistence/product/repository/product.repository';
 import { ProductController } from '@application/controller/product.controller';
 import { ProductTokens } from '@application/token/product.token';
+import { UpdateProductUseCase } from '@core/use-case/product/update-product.use-case';
+import { DeleteProductUseCase } from '@core/use-case/product/delete-product.use-case';
 
 const presistenceProvider: Provider[] = [
   {
@@ -35,6 +37,18 @@ const useCaseProvider: Provider[] = [
     inject: [ProductTokens.ProductRepository],
     useFactory: (productRepository) =>
       new FindAllProductUseCase(productRepository),
+  },
+  {
+    provide: ProductTokens.UpdateProductUseCase,
+    inject: [ProductTokens.ProductRepository],
+    useFactory: (productRepository) =>
+      new UpdateProductUseCase(productRepository),
+  },
+  {
+    provide: ProductTokens.DeleteProductUseCase,
+    inject: [ProductTokens.ProductRepository],
+    useFactory: (productRepository) =>
+      new DeleteProductUseCase(productRepository),
   },
 ];
 

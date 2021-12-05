@@ -14,21 +14,12 @@ export class ProductRepository
   extends Repository<Product>
   implements IProductRepositoryPort
 {
-  async findProductById(productDTO: Partial<ProductDTO>): Promise<ProductDTO> {
-    const product = await this.findOne(productDTO.id);
-    if (!product) {
-      throw new NotFoundException(
-        `Product with ID: ${productDTO.id} was not found`,
-      );
-    }
-    return ProductMapper.EntityToDTO(product);
-  }
   async storeProduct(productDTO: Partial<ProductDTO>) {
     const product = ProductMapper.DTOToEntity(productDTO);
     await this.save(product);
   }
   async findAllProduct(query: IQuery): Promise<ProductDTO[]> {
-    const products = await this.find({
+    const foundProducts = await this.find({
       skip: (query.page - 1) * query.limit || 0,
       take: query.limit || 10,
       order: {
@@ -39,9 +30,34 @@ export class ProductRepository
             : 'ASC',
       },
     });
-    if (products.length === 0) {
-      throw new NotFoundException(`All Product was not found`);
+    return foundProducts.map(ProductMapper.EntityToDTO);
+  }
+  async findProductById(productDTO: Partial<ProductDTO>): Promise<ProductDTO> {
+    const product = ProductMapper.DTOToEntity(productDTO);
+    const foundProduct = await this.findOne({ id: product.id });
+    if (!foundProduct) {
+      throw new NotFoundException(
+        `Product with ID: ${product.id} was not found`,
+      );
     }
-    return products.map(ProductMapper.EntityToDTO);
+    return ProductMapper.EntityToDTO(foundProduct);
+  }
+  async updateProduct(productDTO: Partial<ProductDTO>) {
+    const product = ProductMapper.DTOToEntity(productDTO);
+    const updatedProduct = await this.update({ id: product.id }, product);
+    if (!updatedProduct.affected) {
+      throw new NotFoundException(
+        `Product with ID: ${product.id} was not found`,
+      );
+    }
+  }
+  async deleteProduct(productDTO: Partial<ProductDTO>) {
+    const product = ProductMapper.DTOToEntity(productDTO);
+    const deletedProduct = await this.softDelete({ id: product.id });
+    if (!deletedProduct.affected) {
+      throw new NotFoundException(
+        `Product with ID: ${product.id} was not found`,
+      );
+    }
   }
 }

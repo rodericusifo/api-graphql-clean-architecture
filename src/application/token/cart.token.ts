@@ -3,4 +3,6 @@ export class CartTokens {
     Symbol('CartRepository');
   public static readonly CreateCartUseCase: unique symbol =
     Symbol('CreateCartUseCase');
+  public static readonly FindAllCartUseCase: unique symbol =
+    Symbol('FindAllCartUseCase');
 }
