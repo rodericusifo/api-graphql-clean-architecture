@@ -1,4 +1,4 @@
-input CreateCartRequest {
+input CreateCartBodyRequest {
   quantity: Int
   productId: String
 }

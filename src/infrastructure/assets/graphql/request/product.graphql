@@ -1,4 +1,4 @@
-input CreateProductRequest {
+input CreateProductBodyRequest {
   name: String
   price: Int
   stock: Int

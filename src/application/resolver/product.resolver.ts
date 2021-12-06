@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { CreateProductUseCase } from '@core/use-case/product/create-product.use-case';
 import { ProductTokens } from '@application/token/product.token';
-import { CreateProductRequest } from '@application/resolver/request/product/create-product.request';
+import { CreateProductBodyRequest } from '@application/controller/request/body/product/create-product-body.request';
 
 @Resolver()
 export class ProductResolver {
@@ -18,8 +18,8 @@ export class ProductResolver {
   }
 
   @Mutation()
-  createProduct(@Args('request') request: CreateProductRequest) {
-    this.createProductUseCase.execute({ ...request });
+  createProduct(@Args('body') body: CreateProductBodyRequest) {
+    this.createProductUseCase.execute({ ...body });
     return { statusCode: 201, message: 'Product Successfully Created' };
   }
 }

@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, Min, IsString } from 'class-validator';
 
-export class CreateCartRequest {
+export class CreateCartBodyRequest {
   @IsNotEmpty()
   @IsNumber()
   @Min(0)

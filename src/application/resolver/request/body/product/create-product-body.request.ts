@@ -6,7 +6,7 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class CreateProductRequest {
+export class CreateProductBodyRequest {
   @IsNotEmpty()
   @IsString()
   readonly name: string;

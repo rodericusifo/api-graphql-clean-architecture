@@ -3,7 +3,7 @@ import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { CreateCartUseCase } from '@core/use-case/cart/create-cart.use-case';
 import { CartTokens } from '@application/token/cart.token';
-import { CreateCartRequest } from '@application/resolver/request/cart/create-cart.request';
+import { CreateCartBodyRequest } from '@application/controller/request/body/cart/create-cart-body.request';
 
 @Resolver()
 export class CartResolver {
@@ -18,8 +18,8 @@ export class CartResolver {
   }
 
   @Mutation()
-  createCart(@Args('request') request: CreateCartRequest) {
-    this.createCartUseCase.execute({ ...request });
+  createCart(@Args('body') body: CreateCartBodyRequest) {
+    this.createCartUseCase.execute({ ...body });
     return { statusCode: 201, message: 'Cart Successfully Created' };
   }
 }
