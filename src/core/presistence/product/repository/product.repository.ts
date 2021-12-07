@@ -2,7 +2,7 @@ import {
   IQuery,
   SortingType,
 } from '@core/presistence/interface/query.interface';
-import { ProductMapper } from '@application/mapper/product.mapper';
+import { ProductMapper } from '@core/presistence/mapper/product.mapper';
 import { ProductDTO } from '@core/use-case/product/dto/product.dto';
 import { EntityRepository, Repository } from 'typeorm';
 import { Product } from '@core/presistence/product/entity/product.entity';

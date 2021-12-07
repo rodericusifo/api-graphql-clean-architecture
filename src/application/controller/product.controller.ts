@@ -20,7 +20,7 @@ import { UpdateProductUseCase } from '@core/use-case/product/update-product.use-
 import { EditProductBodyRequest } from '@application/controller/request/body/product/edit-product-body.request';
 import { EditProductParamRequest } from '@application/controller/request/param/product/edit-product-param.request';
 import { DeleteProductUseCase } from '@core/use-case/product/delete-product.use-case';
-import { DeleteProductParamRequest } from './request/param/product/delete-product-param.request';
+import { DeleteProductParamRequest } from '@application/controller/request/param/product/delete-product-param.request';
 
 @Controller('products')
 export class ProductController {

@@ -1,4 +1,4 @@
-import { CartMapper } from '@application/mapper/cart.mapper';
+import { CartMapper } from '@core/presistence/mapper/cart.mapper';
 import { CartDTO } from '@core/use-case/cart/dto/cart.dto';
 import { EntityRepository, Repository } from 'typeorm';
 import { Cart } from '@core/presistence/cart/entity/cart.entity';
@@ -7,7 +7,6 @@ import {
   IQuery,
   SortingType,
 } from '@core/presistence/interface/query.interface';
-import { NotFoundException } from '@nestjs/common';
 
 @EntityRepository(Cart)
 export class CartRepository
