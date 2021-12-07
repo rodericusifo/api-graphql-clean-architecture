@@ -56,5 +56,6 @@ const useCaseProvider: Provider[] = [
   imports: [],
   controllers: [ProductController],
   providers: [...presistenceProvider, ...useCaseProvider, ProductResolver],
+  exports: [ProductTokens.ProductRepository],
 })
 export class ProductModule {}
