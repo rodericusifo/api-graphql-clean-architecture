@@ -9,6 +9,6 @@ export class DeleteProductUseCase implements UseCase<DeleteProductDTO, void> {
 
   async execute(payload?: DeleteProductDTO) {
     const productDTO = plainToClass(ProductDTO, payload);
-    await this.productRepository.deleteProduct(productDTO);
+    this.productRepository.deleteProduct(productDTO);
   }
 }
