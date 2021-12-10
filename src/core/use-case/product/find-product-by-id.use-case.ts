@@ -10,7 +10,8 @@ export class FindProductByIdUseCase
   constructor(private readonly productRepository: IProductRepositoryPort) {}
 
   async execute(payload?: FindProductByIdDTO): Promise<ProductDTO> {
-    const productDTO = plainToClass(ProductDTO, payload);
-    return this.productRepository.findProductById(productDTO);
+    let productDTO = plainToClass(ProductDTO, payload);
+    productDTO = await this.productRepository.findProductById(productDTO);
+    return productDTO;
   }
 }

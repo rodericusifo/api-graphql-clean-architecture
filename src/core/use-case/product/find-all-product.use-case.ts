@@ -16,6 +16,7 @@ export class FindAllProductUseCase
       sortingBy: payload.sortingBy,
       sortingType: payload.sortingType,
     };
-    return this.productRepository.findAllProduct(query);
+    const productDTOs = await this.productRepository.findAllProduct(query);
+    return productDTOs;
   }
 }

@@ -14,6 +14,7 @@ export class FindAllCartUseCase implements UseCase<FindAllCartDTO, CartDTO[]> {
       sortingBy: payload.sortingBy,
       sortingType: payload.sortingType,
     };
-    return this.cartRepository.findAllCart(query);
+    const cartDTOs = await this.cartRepository.findAllCart(query);
+    return cartDTOs;
   }
 }

@@ -22,6 +22,6 @@ export class CreateCartUseCase implements UseCase<CreateCartDTO, void> {
       productDTO: foundProductDTO,
     });
     cartDTO.calculateAmount();
-    this.cartRepository.storeCart(cartDTO);
+    await this.cartRepository.storeCart(cartDTO);
   }
 }

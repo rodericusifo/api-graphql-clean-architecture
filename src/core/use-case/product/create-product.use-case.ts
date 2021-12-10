@@ -9,6 +9,6 @@ export class CreateProductUseCase implements UseCase<CreateProductDTO, void> {
 
   async execute(payload?: CreateProductDTO) {
     const productDTO = plainToClass(ProductDTO, payload);
-    this.productRepository.storeProduct(productDTO);
+    await this.productRepository.storeProduct(productDTO);
   }
 }
