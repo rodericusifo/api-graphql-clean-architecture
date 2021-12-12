@@ -19,7 +19,7 @@ export class CreateCartUseCase implements UseCase<CreateCartDTO, void> {
     );
     const cartDTO = plainToClass(CartDTO, {
       quantity: payload.quantity,
-      productDTO: foundProductDTO,
+      product: foundProductDTO,
     });
     cartDTO.calculateAmount();
     await this.cartRepository.storeCart(cartDTO);

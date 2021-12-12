@@ -16,7 +16,7 @@ export class CartDTO {
 
   @IsOptional()
   @IsNumber()
-  @Min(0)
+  @Min(1)
   quantity?: number;
 
   @IsOptional()

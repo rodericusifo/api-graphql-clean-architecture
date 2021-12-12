@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber, Min, IsUUID } from 'class-validator';
 export class CreateCartBodyRequest {
   @IsNotEmpty()
   @IsNumber()
-  @Min(0)
+  @Min(1)
   readonly quantity: number;
 
   @IsNotEmpty()
