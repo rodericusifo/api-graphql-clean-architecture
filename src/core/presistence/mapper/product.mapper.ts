@@ -4,10 +4,17 @@ import { plainToClass } from 'class-transformer';
 
 export class ProductMapper {
   static DTOToEntity(productDTO: Partial<ProductDTO>): Product {
-    return plainToClass(Product, productDTO);
+    const product = plainToClass(Product, productDTO);
+    return product;
   }
 
   static EntityToDTO(product: Partial<Product>): ProductDTO {
-    return plainToClass(ProductDTO, product);
+    const productDTO = plainToClass(ProductDTO, product);
+    // productDTO.carts = product.carts.map((cart) => {
+    //   const cartDTO = plainToClass(CartDTO, cart);
+    //   cartDTO.product = plainToClass(ProductDTO, cart.product);
+    //   return cartDTO;
+    // });
+    return productDTO;
   }
 }

@@ -3,11 +3,11 @@ import {
   SortingType,
 } from '@core/presistence/interface/query.interface';
 import { ProductMapper } from '@core/presistence/mapper/product.mapper';
-import { ProductDTO } from '@core/use-case/product/dto/product.dto';
-import { EntityRepository, Repository } from 'typeorm';
 import { Product } from '@core/presistence/product/entity/product.entity';
 import { IProductRepositoryPort } from '@core/presistence/product/repository/port/product-repository.port';
+import { ProductDTO } from '@core/use-case/product/dto/product.dto';
 import { NotFoundException } from '@nestjs/common';
+import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Product)
 export class ProductRepository
@@ -29,6 +29,7 @@ export class ProductRepository
             ? 'DESC'
             : 'ASC',
       },
+      // relations: ['carts', 'carts.product'],
     });
     return foundProducts.map(ProductMapper.EntityToDTO);
   }
